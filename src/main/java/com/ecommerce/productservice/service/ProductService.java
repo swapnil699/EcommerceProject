@@ -52,3 +52,22 @@ public class ProductService {
         return returnedProducts;
     }
 }
+
+
+/* First class : code
+ public GetProductDto getProductDto(Long id){
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String Url = "https://fakestoreapi.com/products/" + id;
+
+        Product product = restTemplate.getForObject(Url, Product.class);
+        System.out.println(product);
+
+        GetProductDto obj = new GetProductDto();
+        obj.setName(product.getTitle());
+        obj.setPrice(product.getPrice());
+        obj.setImageUrl(product.getImage());
+        return obj;
+    }
+*/
