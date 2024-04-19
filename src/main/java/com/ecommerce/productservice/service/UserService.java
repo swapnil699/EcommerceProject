@@ -6,6 +6,8 @@ import com.ecommerce.productservice.repository.InstructorRepository;
 import com.ecommerce.productservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -35,7 +37,16 @@ public class UserService {
         return instructor;
     }
 
+    // this should not be work of list
 //    public User getUserByName(String name) {
-//        return userRepository.findByName(name).get();
+//        return userRepository.findByName(name);
 //    }
+
+    public List<User> getUserByName(String name) {
+        return userRepository.findByName(name);
+    }
+
+    public List<Instructor> getInstructorByName(String name) {
+        return instructorRepository.findByName(name);
+    }
 }

@@ -11,7 +11,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Getter
 @Setter
-@MappedSuperclass
+@Entity
 // telling hibernate to create a table for you
 public class User {
     @Id
