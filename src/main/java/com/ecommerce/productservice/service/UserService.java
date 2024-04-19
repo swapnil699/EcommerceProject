@@ -1,6 +1,8 @@
 package com.ecommerce.productservice.service;
 
+import com.ecommerce.productservice.models.Instructor;
 import com.ecommerce.productservice.models.User;
+import com.ecommerce.productservice.repository.InstructorRepository;
 import com.ecommerce.productservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +10,12 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final InstructorRepository instructorRepository;
 
-    public UserService(UserRepository userRepository) {
+
+    public UserService(UserRepository userRepository, InstructorRepository instructorRepository) {
         this.userRepository = userRepository;
+        this.instructorRepository = instructorRepository;
     }
     public User createUser(String name, String email) {
         User user = new User();
@@ -20,7 +25,17 @@ public class UserService {
         return user;
     }
 
-    public User getUserByName(String name) {
-        return userRepository.findByName(name).get();
+    public User createInstructor(String name, String email) {
+        Instructor instructor = new Instructor();
+        instructor.setName(name);
+        instructor.setEmail(email);
+        instructor.setSalary(20000.0);
+        instructor.setSkill("Backend");
+        instructorRepository.save(instructor);
+        return instructor;
     }
+
+//    public User getUserByName(String name) {
+//        return userRepository.findByName(name).get();
+//    }
 }

@@ -1,23 +1,22 @@
 package com.ecommerce.productservice.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.UUID;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Getter
 @Setter
-@Entity(name = "ecomm_user")
+@MappedSuperclass
 // telling hibernate to create a table for you
 public class User {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
     private String name;
     @Column(name = "email_address", unique = true)
     private String email;

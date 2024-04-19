@@ -21,8 +21,14 @@ public class UserController {
                 createUser(createUserDto.getName(), createUserDto.getEmail());
     }
 
-    @GetMapping("/{name}")
-    public User getUserByName(@PathVariable(name = "name") String name) {
-        return userService.getUserByName(name);
+    @PostMapping("/instructor")
+    public User createInstructor(@RequestBody CreateUserDto createUserDto) {
+        return userService.
+                createInstructor(createUserDto.getName(), createUserDto.getEmail());
     }
+
+//    @GetMapping("/{name}")
+//    public User getUserByName(@PathVariable(name = "name") String name) {
+//        return userService.getUserByName(name);
+//    }
 }
