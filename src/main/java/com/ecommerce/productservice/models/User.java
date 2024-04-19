@@ -12,7 +12,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED )
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS )
 // telling hibernate to create a table for you
 public class User {
     @Id
