@@ -12,10 +12,12 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED )
 // telling hibernate to create a table for you
 public class User {
     @Id
     @GeneratedValue
+
     private UUID id;
     private String name;
     @Column(name = "email_address", unique = true)
