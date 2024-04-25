@@ -8,6 +8,7 @@ import com.ecommerce.productservice.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -42,8 +43,18 @@ public class UserController {
         return userService.getUserByName(name);
     }
 
-    @GetMapping("/instructor/{name}")
-    public List<GetInstructorDto> getInstructorByName(@PathVariable(name = "name") String name) {
-        return userService.getInstructorByName(name);
+//    @GetMapping("/instructor/{name}")
+//    public List<GetInstructorDto> getInstructorByName(@PathVariable(name = "name") String name) {
+//        return userService.getInstructorByName(name);
+//    }
+
+//    @GetMapping("/instructor/{uuid}")
+//    public GetInstructorDto getInstructorByUUID(@PathVariable(name = "uuid") UUID uuid) {
+//        return userService.getInstructorById(uuid);
+//    }
+
+    @GetMapping("/instructor")
+    public List<GetInstructorDto> getInstructorByUUID(@RequestBody List<UUID> uuid) {
+        return userService.getInstructorByIds(uuid);
     }
 }

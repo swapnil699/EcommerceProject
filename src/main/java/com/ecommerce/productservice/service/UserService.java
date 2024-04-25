@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -49,6 +51,16 @@ public class UserService {
         return userRepository.findByName(name);
     }
 
+    public GetInstructorDto getInstructorById(UUID uuid){
+        Instructor instructor = instructorRepository.findById(uuid).get();
+        GetInstructorDto getInstructorDto = new GetInstructorDto();
+        getInstructorDto.setId(instructor.getId());
+        getInstructorDto.setName(instructor.getName());
+        getInstructorDto.setEmail(instructor.getEmail());
+
+        return getInstructorDto;
+    }
+
     public List<GetInstructorDto> getInstructorByName(String name) {
 
         List<Instructor> instructors = instructorRepository.findByName(name);
@@ -72,5 +84,23 @@ public class UserService {
             instructorDtos.add(getInstructorDto);
         }
         return instructorDtos;
+    }
+
+    public List<GetInstructorDto> getInstructorByIds(List<UUID> uuid) {
+        List<Instructor> instructors = instructorRepository.findAllById(uuid);
+
+        List<GetInstructorDto> instructorDtos = new ArrayList<>();
+        for (Instructor instructor: instructors) {
+            GetInstructorDto getInstructorDto = new GetInstructorDto();
+            getInstructorDto.setId(instructor.getId());
+            getInstructorDto.setName(instructor.getName());
+            getInstructorDto.setEmail(instructor.getEmail());
+
+            instructorDtos.add(getInstructorDto);
+        }
+
+
+        return instructorDtos;
+
     }
 }
