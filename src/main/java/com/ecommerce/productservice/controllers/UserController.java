@@ -27,10 +27,11 @@ public class UserController {
     }
 
     @PostMapping("/instructor")
-    public User createInstructor(@RequestBody CreateUserDto createUserDto) {
+    public Instructor createInstructor(@RequestBody CreateUserDto createUserDto) {
         return userService.
                 createInstructor(createUserDto.getName(), createUserDto.getEmail());
     }
+
 
 // this should not be work of list
 //    @GetMapping("/{name}")
@@ -52,6 +53,11 @@ public class UserController {
 //    public GetInstructorDto getInstructorByUUID(@PathVariable(name = "uuid") UUID uuid) {
 //        return userService.getInstructorById(uuid);
 //    }
+
+    @GetMapping("/instructor/{name}")
+    public List<GetInstructorDto> getInstructorByName(@PathVariable(name = "name") String name) {
+        return userService.getInstructorByName(name);
+    }
 
     @GetMapping("/instructor")
     public List<GetInstructorDto> getInstructorByUUID(@RequestBody List<UUID> uuid) {
