@@ -32,7 +32,7 @@ public class UserService {
         return user;
     }
 
-    public User createInstructor(String name, String email) {
+    public Instructor createInstructor(String name, String email) {
         Instructor instructor = new Instructor();
         instructor.setName(name);
         instructor.setEmail(email);

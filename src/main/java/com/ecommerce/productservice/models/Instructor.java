@@ -14,7 +14,7 @@ import java.util.List;
 public class Instructor extends User{
     private double salary;
     private String skill;
-    @OneToMany(fetch = jakarta.persistence.FetchType.EAGER, mappedBy = "instructor", cascade =  CascadeType.REFRESH)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "instructor", cascade =  CascadeType.REMOVE)
     @Fetch(FetchMode.SELECT)
     private List<Batch> batch;
 }
