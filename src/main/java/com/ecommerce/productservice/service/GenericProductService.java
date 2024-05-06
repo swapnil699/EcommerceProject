@@ -40,4 +40,10 @@ public class GenericProductService {
 
         return true;
     }
+
+    public List<GenericProduct> searchProducts(String query) {
+
+        return genericProductRepository.findAll();
+
+    }
 }
