@@ -32,27 +32,10 @@ public class UserController {
                 createInstructor(createUserDto.getName(), createUserDto.getEmail());
     }
 
-
-// this should not be work of list
-//    @GetMapping("/{name}")
-//    public User getUserByName(@PathVariable(name = "name") String name) {
-//        return userService.getUserByName(name);
-//    }
-
     @GetMapping("/{name}")
     public List<User> getUserByName(@PathVariable(name = "name") String name) {
         return userService.getUserByName(name);
     }
-
-//    @GetMapping("/instructor/{name}")
-//    public List<GetInstructorDto> getInstructorByName(@PathVariable(name = "name") String name) {
-//        return userService.getInstructorByName(name);
-//    }
-
-//    @GetMapping("/instructor/{uuid}")
-//    public GetInstructorDto getInstructorByUUID(@PathVariable(name = "uuid") UUID uuid) {
-//        return userService.getInstructorById(uuid);
-//    }
 
     @GetMapping("/instructor/{name}")
     public List<GetInstructorDto> getInstructorByName(@PathVariable(name = "name") String name) {
@@ -63,4 +46,5 @@ public class UserController {
     public List<GetInstructorDto> getInstructorByUUID(@RequestBody List<UUID> uuid) {
         return userService.getInstructorByIds(uuid);
     }
+
 }

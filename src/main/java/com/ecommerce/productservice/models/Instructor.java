@@ -12,9 +12,10 @@ import java.util.List;
 @Getter
 @Setter
 public class Instructor extends User{
-    private double salary;
+    private Double salary;
     private String skill;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "instructor", cascade =  CascadeType.REMOVE)
-    @Fetch(FetchMode.SELECT)
+    @OneToMany
+    @Fetch(FetchMode.SUBSELECT)
     private List<Batch> batch;
+
 }

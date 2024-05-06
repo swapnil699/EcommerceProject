@@ -16,14 +16,15 @@ import java.util.UUID;
 @Service
 public class UserService {
 
+
     private final UserRepository userRepository;
     private final InstructorRepository instructorRepository;
-
 
     public UserService(UserRepository userRepository, InstructorRepository instructorRepository) {
         this.userRepository = userRepository;
         this.instructorRepository = instructorRepository;
     }
+
     public User createUser(String name, String email) {
         User user = new User();
         user.setName(name);
@@ -38,52 +39,14 @@ public class UserService {
         instructor.setEmail(email);
         instructor.setSalary(20000.0);
         instructor.setSkill("Backend");
+
         instructorRepository.save(instructor);
         return instructor;
     }
 
-    // this should not be work of list
-//    public User getUserByName(String name) {
-//        return userRepository.findByName(name);
-//    }
-
     public List<User> getUserByName(String name) {
         return userRepository.findByName(name);
-    }
 
-    public GetInstructorDto getInstructorById(UUID uuid){
-        Instructor instructor = instructorRepository.findById(uuid).get();
-        GetInstructorDto getInstructorDto = new GetInstructorDto();
-        getInstructorDto.setId(instructor.getId());
-        getInstructorDto.setName(instructor.getName());
-        getInstructorDto.setEmail(instructor.getEmail());
-
-        return getInstructorDto;
-    }
-
-    public List<GetInstructorDto> getInstructorByName(String name) {
-
-        List<Instructor> instructors = instructorRepository.findByName(name);
-
-        List<GetInstructorDto> instructorDtos = new ArrayList<>();
-        for (Instructor instructor: instructors) {
-            GetInstructorDto getInstructorDto = new GetInstructorDto();
-            getInstructorDto.setId(instructor.getId());
-            getInstructorDto.setName(instructor.getName());
-            getInstructorDto.setEmail(instructor.getEmail());
-
-            // Fetch batch details for the instructor
-            List<String> batchNames = new ArrayList<>();
-            List<Long> ids = new ArrayList<>();
-            for (Batch batch: instructor.getBatch()) {
-               batchNames.add(batch.getName());
-               ids.add(batch.getId());
-            }
-            getInstructorDto.setBatchName(batchNames);
-            getInstructorDto.setBatchId(ids);
-            instructorDtos.add(getInstructorDto);
-        }
-        return instructorDtos;
     }
 
     public List<GetInstructorDto> getInstructorByIds(List<UUID> uuid) {
@@ -96,11 +59,42 @@ public class UserService {
             getInstructorDto.setName(instructor.getName());
             getInstructorDto.setEmail(instructor.getEmail());
 
+            List<String> batchNames = new ArrayList<>();
+            List<Long> ids = new ArrayList<>();
+            for (Batch batch: instructor.getBatch()) {
+                batchNames.add(batch.getName());
+                ids.add(batch.getId());
+            }
+            getInstructorDto.setBatchName(batchNames);
+            getInstructorDto.setBatchId(ids);
             instructorDtos.add(getInstructorDto);
         }
 
 
         return instructorDtos;
 
+    }
+
+    public List<GetInstructorDto> getInstructorByName(String name) {
+
+        List<Instructor> instructors = instructorRepository.findByName(name);
+
+        List<GetInstructorDto> instructorDtos = new ArrayList<>();
+        for (Instructor instructor: instructors) {
+            GetInstructorDto getInstructorDto = new GetInstructorDto();
+            getInstructorDto.setId(instructor.getId());
+            getInstructorDto.setName(instructor.getName());
+            getInstructorDto.setEmail(instructor.getEmail());
+            List<String> batchNames = new ArrayList<>();
+            List<Long> ids = new ArrayList<>();
+            for (Batch batch: instructor.getBatch()) {
+                batchNames.add(batch.getName());
+                ids.add(batch.getId());
+            }
+            getInstructorDto.setBatchName(batchNames);
+            getInstructorDto.setBatchId(ids);
+            instructorDtos.add(getInstructorDto);
+        }
+        return instructorDtos;
     }
 }
