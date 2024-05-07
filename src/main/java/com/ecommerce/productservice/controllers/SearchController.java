@@ -2,6 +2,7 @@ package com.ecommerce.productservice.controllers;
 
 import com.ecommerce.productservice.models.GenericProduct;
 import com.ecommerce.productservice.service.GenericProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,5 +28,13 @@ public class SearchController {
     public ResponseEntity<List<GenericProduct>> searchProducts(
             @RequestParam(value = "q", required = false) String query) {
         return ResponseEntity.ok(genericProductService.searchProducts(query));
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Page<GenericProduct>> searchProductsByPage(
+            @RequestParam(value = "q", required = false) String query,
+            @RequestParam(value = "pageNo") int pageNumber,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "20") int pageSize) {
+        return ResponseEntity.ok(genericProductService.searchProductsByPagination(query, pageNumber,pageSize));
     }
 }

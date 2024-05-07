@@ -2,6 +2,8 @@ package com.ecommerce.productservice.service;
 
 import com.ecommerce.productservice.models.GenericProduct;
 import com.ecommerce.productservice.repository.GenericProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -45,5 +47,11 @@ public class GenericProductService {
 
         return genericProductRepository.findAll();
 
+    }
+
+    public Page<GenericProduct> searchProductsByPagination(String query,int pageNumber, int pageSize) {
+        return  genericProductRepository.findAll(
+                PageRequest.of(pageNumber,pageSize)
+        );
     }
 }
