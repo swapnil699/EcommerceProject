@@ -34,7 +34,8 @@ public class SearchController {
     public ResponseEntity<Page<GenericProduct>> searchProductsByPage(
             @RequestParam(value = "q", required = false) String query,
             @RequestParam(value = "pageNo") int pageNumber,
-            @RequestParam(value = "pageSize", required = false, defaultValue = "20") int pageSize) {
-        return ResponseEntity.ok(genericProductService.searchProductsByPagination(query, pageNumber,pageSize));
+            @RequestParam(value = "pageSize", required = false, defaultValue = "20") int pageSize,
+            @RequestParam(value = "s", required = false, defaultValue ="id-asc") String sorting) {
+        return ResponseEntity.ok(genericProductService.searchProductsByPagination(query, pageNumber,pageSize,sorting));
     }
 }

@@ -50,9 +50,18 @@ public class GenericProductService {
 
     }
 
-    public Page<GenericProduct> searchProductsByPagination(String query,int pageNumber, int pageSize) {
-        return  genericProductRepository.findAll(
-                PageRequest.of(pageNumber,pageSize, Sort.Direction.DESC, "id")
-        );
+    public Page<GenericProduct> searchProductsByPagination(String query,int pageNumber, int pageSize, String sorting) {
+        return switch (sorting) {
+            case "id-asc" -> genericProductRepository.findAll(
+                    PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "id")
+            );
+            case "name-desc" -> genericProductRepository.findAll(
+                    PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "name")
+            );
+            default -> genericProductRepository.findAll(
+                    PageRequest.of(pageNumber, pageSize)
+            );
+        };
+
     }
 }
